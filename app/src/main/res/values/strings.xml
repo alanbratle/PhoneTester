@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Phone Tester</string>
+    <string name="dashboard_title">Phone Tester Pro</string>
+    <string name="dashboard_subtitle">Комплексная диагностика смартфона</string>
+    <string name="run_all_tests">Запустить все тесты</string>
+    <string name="test_results">Результаты</string>
+    <string name="about">О приложении</string>
+    <string name="passed">Пройден</string>
+    <string name="failed">Не пройден</string>
+    <string name="skipped">Пропущен</string>
+    <string name="testing">Тестирование…</string>
+    <string name="back">Назад</string>
+    <string name="finish">Завершить</string>
+
+    <!-- Test Categories -->
+    <string name="test_screen">Экран</string>
+    <string name="test_touch">Тачскрин</string>
+    <string name="test_battery">Батарея</string>
+    <string name="test_sensors">Сенсоры</string>
+    <string name="test_camera">Камера</string>
+    <string name="test_audio">Аудио</string>
+    <string name="test_connectivity">Связь</string>
+    <string name="test_storage">Хранилище</string>
+    <string name="test_cpu">Процессор</string>
+    <string name="test_network">Сеть</string>
+    <string name="test_display_info">Дисплей</string>
+    <string name="test_gps">GPS</string>
+
+    <!-- Screen Test -->
+    <string name="screen_test_desc">Проверка цветовой палитры и битых пикселей</string>
+    <string name="screen_tap_to_advance">Нажмите для смены цвета</string>
+    <string name="screen_dead_pixel_check">Поиск битых пикселей</string>
+
+    <!-- Touch Test -->
+    <string name="touch_test_desc">Проверка мультитача и отклика экрана</string>
+    <string name="touch_draw_here">Рисуйте пальцами по экрану</string>
+    <string name="touch_max_points">Максимум точек: %d</string>
+
+    <!-- Battery Test -->
+    <string name="battery_test_desc">Состояние батареи и зарядное устройство</string>
+    <string name="battery_health">Здоровье</string>
+    <string name="battery_level">Уровень заряда</string>
+    <string name="battery_temperature">Температура</string>
+    <string name="battery_voltage">Напряжение</string>
+    <string name="battery_status">Статус</string>
+
+    <!-- Sensor Test -->
+    <string name="sensor_test_desc">Проверка всех доступных датчиков</string>
+    <string name="sensor_accelerometer">Акселерометр</string>
+    <string name="sensor_gyroscope">Гироскоп</string>
+    <string name="sensor_magnetometer">Магнитометр</string>
+    <string name="sensor_proximity">Датчик приближения</string>
+    <string name="sensor_light">Датчик света</string>
+    <string name="sensor_available">Доступен</string>
+    <string name="sensor_not_available">Недоступен</string>
+
+    <!-- Camera Test -->
+    <string name="camera_test_desc">Проверка передней и задней камеры</string>
+    <string name="camera_front">Передняя камера</string>
+    <string name="camera_back">Задняя камера</string>
+    <string name="camera_switch">Переключить камеру</string>
+    <string name="camera_capture">Снять фото</string>
+
+    <!-- Audio Test -->
+    <string name="audio_test_desc">Проверка динамика и микрофона</string>
+    <string name="audio_speaker_test">Тест динамика</string>
+    <string name="audio_mic_test">Тест микрофона</string>
+    <string name="audio_play_sound">Воспроизвести звук</string>
+    <string name="audio_start_recording">Начать запись</string>
+    <string name="audio_stop_recording">Остановить запись</string>
+    <string name="audio_play_recording">Воспроизвести запись</string>
+
+    <!-- Connectivity Test -->
+    <string name="connectivity_test_desc">Wi-Fi, Bluetooth и сотовая связь</string>
+    <string name="wifi_status">Wi-Fi</string>
+    <string name="bluetooth_status">Bluetooth</string>
+    <string name="cellular_status">Сотовая связь</string>
+    <string name="connected">Подключено</string>
+    <string name="disconnected">Отключено</string>
+    <string name="not_available">Недоступно</string>
+
+    <!-- Storage Test -->
+    <string name="storage_test_desc">Скорость чтения и записи</string>
+    <string name="storage_write_speed">Скорость записи</string>
+    <string name="storage_read_speed">Скорость чтения</string>
+    <string name="storage_total">Всего</string>
+    <string name="storage_used">Использовано</string>
+    <string name="storage_free">Свободно</string>
+    <string name="storage_running">Тестирование…</string>
+
+    <!-- CPU Test -->
+    <string name="cpu_test_desc">Производительность процессора</string>
+    <string name="cpu_cores">Ядра</string>
+    <string name="cpu_frequency">Частота</string>
+    <string name="cpu_architecture">Архитектура</string>
+    <string name="cpu_benchmark">Бенчмарк</string>
+    <string name="cpu_benchmark_running">Вычисление…</string>
+
+    <!-- Network Test -->
+    <string name="network_test_desc">Скорость интернет-соединения</string>
+    <string name="network_download">Скачивание</string>
+    <string name="network_upload">Загрузка</string>
+    <string name="network_latency">Пинг</string>
+    <string name="network_start">Начать тест</string>
+
+    <!-- Display Info -->
+    <string name="display_info_desc">Информация о дисплее устройства</string>
+    <string name="display_resolution">Разрешение</string>
+    <string name="display_density">Плотность пикселей</string>
+    <string name="display_refresh_rate">Частота обновления</string>
+    <string name="display_size">Физический размер</string>
+    <string name="display_hdr">HDR поддержка</string>
+
+    <!-- GPS Test -->
+    <string name="gps_test_desc">Определение местоположения по GPS</string>
+    <string name="gps_latitude">Широта</string>
+    <string name="gps_longitude">Долгота</string>
+    <string name="gps_accuracy">Точность</string>
+    <string name="gps_searching">Поиск спутников…</string>
+
+    <!-- Results -->
+    <string name="results_title">Результаты тестирования</string>
+    <string name="results_all_passed">Все тесты пройдены!</string>
+    <string name="results_some_failed">Некоторые тесты не пройдены</string>
+    <string name="results_export">Экспорт результатов</string>
+    <string name="results_rerun">Пройти заново</string>
+
+    <!-- Permissions -->
+    <string name="permission_required">Необходимо разрешение</string>
+    <string name="permission_grant">Разрешить</string>
+    <string name="permission_denied">Разрешение отклонено</string>
+</resources>
