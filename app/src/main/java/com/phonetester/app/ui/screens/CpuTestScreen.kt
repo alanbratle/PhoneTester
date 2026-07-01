@@ -14,6 +14,7 @@ import com.phonetester.app.ui.components.TestScreenScaffold
 import com.phonetester.app.viewmodel.DashboardViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.File
 
