@@ -21,6 +21,8 @@ import com.phonetester.app.ui.components.DetailRow
 import com.phonetester.app.ui.components.TestScreenScaffold
 import com.phonetester.app.viewmodel.DashboardViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine

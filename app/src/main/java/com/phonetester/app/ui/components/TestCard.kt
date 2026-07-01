@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -213,7 +212,7 @@ fun DetailRow(
 }
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)`n@OptIn(ExperimentalMaterial3Api::class)`nfun TestScreenScaffold(
+@OptIn(ExperimentalMaterial3Api::class)`nfun TestScreenScaffold(
     title: String,
     onBack: () -> Unit,
     actions: @Composable RowScope.() -> Unit = {},
