@@ -88,14 +88,18 @@ fun getBatteryInfoData(context: Context): BatteryInfoData {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BatteryTestScreen(onBack: () -> Unit) {
-    val context = LocalContext.current
+fun BatteryTestScreen(
+    onBack: () -> Unit,
+    context: Context? = null,
+    viewModel: Any? = null
+) {
+    val ctx = context ?: LocalContext.current
     var info by remember { mutableStateOf(getBatteryInfoData(context)) }
 
     LaunchedEffect(Unit) {
         while (true) {
             delay(2000)
-            info = getBatteryInfoData(context)
+            info = getBatteryInfoData(ctx)
         }
     }
 

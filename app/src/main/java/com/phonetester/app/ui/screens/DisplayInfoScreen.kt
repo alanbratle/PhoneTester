@@ -42,7 +42,7 @@ fun getDisplayInfoData(context: Context): DisplayInfoData {
     val m = context.resources.displayMetrics
 
     val colorModeStr = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val mode = display.colorMode
+        val mode = try { display.javaClass.getField("colorMode").getInt(display) } catch (_: Exception) { 0 }
         when (mode) {
             0 -> "Default (sRGB)"
             1 -> "Wide Color Gamut"
