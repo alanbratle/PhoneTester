@@ -1,18 +1,26 @@
 package com.phonetester.app.ui.components
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -60,21 +68,6 @@ fun TestCard(
         label = "statusColor"
     )
 
-    val icon = when (category) {
-        TestCategory.SCREEN -> "\uD83D\uDCF1"
-        TestCategory.TOUCH -> "\uD83D\uDC46"
-        TestCategory.BATTERY -> "\uD83D\uDD0B"
-        TestCategory.SENSORS -> "\uD83D\uDCE1"
-        TestCategory.CAMERA -> "\uD83D\uDCF7"
-        TestCategory.AUDIO -> "\uD83D\uDD0A"
-        TestCategory.CONNECTIVITY -> "\uD83D\uDCF6"
-        TestCategory.STORAGE -> "\uD83D\uDCBE"
-        TestCategory.CPU -> "\u26A1"
-        TestCategory.NETWORK -> "\uD83C\uDF10"
-        TestCategory.DISPLAY_INFO -> "\uD83D\uDDA5\uFE0F"
-        TestCategory.GPS -> "\uD83D\uDCCD"
-    }
-
     ElevatedCard(
         onClick = onClick,
         modifier = modifier.fillMaxWidth()
@@ -88,7 +81,7 @@ fun TestCard(
             Box(
                 modifier = Modifier
                     .size(48.dp)
-                    .clip(MaterialTheme.shapes.medium)
+                    .clip(CircleShape)
                     .background(
                         Brush.verticalGradient(
                             colors = listOf(
@@ -99,12 +92,16 @@ fun TestCard(
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = icon, fontSize = MaterialTheme.typography.headlineMedium.fontSize)
+                Text(
+                    text = category.displayName.take(2),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = statusColor
+                )
             }
 
-            Spacer(modifier = Modifier.weight(0.05f))
+            Spacer(modifier = Modifier.width(16.dp))
 
-            androidx.compose.foundation.layout.Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = category.displayName,
                     style = MaterialTheme.typography.titleMedium,
@@ -133,7 +130,6 @@ fun StatusChip(status: TestStatus) {
         TestStatus.SKIPPED -> { text = "-"; color = StatusSkipped }
         TestStatus.PENDING -> { text = "?"; color = StatusPending }
     }
-
     Surface(
         shape = MaterialTheme.shapes.small,
         color = color.copy(alpha = 0.15f)
@@ -162,14 +158,11 @@ fun ProgressRing(
         animationSpec = tween(durationMillis = 800, easing = FastOutSlowInEasing),
         label = "progress"
     )
-
     Box(
         modifier = modifier.size(size),
         contentAlignment = Alignment.Center
     ) {
-        Canvas(
-            modifier = Modifier.matchParentSize()
-        ) {
+        Canvas(modifier = Modifier.matchParentSize()) {
             val sweep = animatedProgress * 360f
             drawArc(
                 color = backgroundColor,
@@ -187,7 +180,7 @@ fun ProgressRing(
             )
         }
         Text(
-            text = "${(animatedProgress * 100).toInt()}%",
+            text = (animatedProgress * 100).toInt().toString() + "%",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
@@ -207,11 +200,8 @@ fun DetailRow(
         TestStatus.TESTING -> StatusTesting
         else -> MaterialTheme.colorScheme.onSurface
     }
-
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
@@ -228,12 +218,13 @@ fun DetailRow(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TestScreenScaffold(
     title: String,
     onBack: () -> Unit,
     actions: @Composable () -> Unit = {},
-    content: @Composable (androidx.compose.foundation.layout.PaddingValues) -> Unit
+    content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -242,14 +233,12 @@ fun TestScreenScaffold(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
-                            imageVector = androidx.compose.material.icons.Icons.AutoMirrored.Filled.ArrowBack,
+                            imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back"
                         )
                     }
                 },
-                actions = {
-                    actions()
-                }
+                actions = { actions() }
             )
         },
         content = content

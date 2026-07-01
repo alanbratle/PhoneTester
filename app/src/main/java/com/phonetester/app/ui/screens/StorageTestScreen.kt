@@ -6,7 +6,7 @@ import android.os.StatFs
 import android.text.format.Formatter
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.HorizontalDivider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,8 +51,8 @@ fun StorageTestScreen(
     var totalSpace by remember { mutableStateOf("---") }
     var usedSpace by remember { mutableStateOf("---") }
     var freeSpace by remember { mutableStateOf("---") }
-    var writeSpeed by remember { mutableStateOf<Float?>(null) }
-    var readSpeed by remember { mutableStateOf<Float?>(null) }
+    var writeSpeed by remember { mutableStateOf<Double?>(null) }
+    var readSpeed by remember { mutableStateOf<Double?>(null) }
     var isRunning by remember { mutableStateOf(false) }
     var progress by remember { mutableFloatStateOf(0f) }
     var progressLabel by remember { mutableStateOf("Preparing...") }
