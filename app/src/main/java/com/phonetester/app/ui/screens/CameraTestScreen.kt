@@ -190,7 +190,7 @@ fun CameraTestScreen(
                                             CameraSelector.DEFAULT_BACK_CAMERA
                                         }
                                         val preview = Preview.Builder().build().also {
-                                            it.surfaceProvider = previewView.surfaceProvider
+                                            it.setSurfaceProvider(previewView.surfaceProvider)
                                         }
                                         provider.unbindAll()
                                         provider.bindToLifecycle(

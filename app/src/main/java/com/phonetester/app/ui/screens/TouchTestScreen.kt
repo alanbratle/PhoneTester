@@ -50,7 +50,7 @@ private val touchColors = listOf(
 )
 
 private data class TouchPoint(
-    val id: Int,
+    val id: Long,
     val x: Float,
     val y: Float
 )
@@ -174,7 +174,7 @@ fun TouchTestScreen(
             ) {
                 val points = activePoints.toList()
                 for (point in points) {
-                    val color = touchColors[point.id % touchColors.size]
+                    val color = touchColors[(point.id % touchColors.size).toInt()]
                     val center = Offset(point.x, point.y)
 
                     // Outer semi-transparent filled circle

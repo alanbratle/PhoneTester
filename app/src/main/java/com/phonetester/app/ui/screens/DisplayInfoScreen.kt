@@ -71,7 +71,7 @@ fun DisplayInfoScreen(
     }
 
     val hdrType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        display.hdrCapabilities?.supportedHdrTypes?.mapNotNull { type ->
+        display.hdrCapabilities?.supportedHdrTypes?.toList()?.mapNotNull { type ->
             when (type) {
                 Display.HdrCapabilities.HDR_TYPE_DOLBY_VISION -> "Dolby Vision"
                 Display.HdrCapabilities.HDR_TYPE_HDR10 -> "HDR10"

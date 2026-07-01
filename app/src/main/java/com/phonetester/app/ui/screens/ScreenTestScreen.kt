@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -174,11 +175,11 @@ fun ScreenTestScreen(
 @Composable
 private fun getCurrentBackground(step: Int): Brush {
     return if (step < solidColors.size) {
-        Brush.solid(solidColors[step])
+        SolidColor(solidColors[step])
     } else {
         val patternIndex = step - solidColors.size
         val pattern = gradientPatterns.getOrElse(patternIndex) {
-            return Brush.solid(Color.Black)
+            return SolidColor(Color.Black)
         }
         pattern.brushProvider(0f, 0f)
     }

@@ -13,6 +13,7 @@ import com.phonetester.app.ui.components.DetailRow
 import com.phonetester.app.ui.components.TestScreenScaffold
 import com.phonetester.app.viewmodel.DashboardViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -70,7 +71,7 @@ fun CpuTestScreen(
         val primeLimit = 500_000
         val startTime = System.nanoTime()
 
-        val count = coroutineScope.launch(Dispatchers.Default) {
+        val count = coroutineScope.async(Dispatchers.Default) {
             var found = 0
             for (n in 2..primeLimit) {
                 if (isPrime(n)) {
@@ -81,7 +82,7 @@ fun CpuTestScreen(
                 }
             }
             found
-        }.join()
+        }.await()
 
         val elapsedMs = (System.nanoTime() - startTime) / 1_000_000
         primeCount = count
