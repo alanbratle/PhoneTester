@@ -2,11 +2,24 @@ package com.phonetester.app.ui.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.*
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -22,7 +35,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.phonetester.app.model.TestCategory
 import com.phonetester.app.model.TestStatus
-import com.phonetester.app.ui.theme.*
+import com.phonetester.app.ui.theme.StatusFailed
+import com.phonetester.app.ui.theme.StatusPassed
+import com.phonetester.app.ui.theme.StatusPending
+import com.phonetester.app.ui.theme.StatusSkipped
+import com.phonetester.app.ui.theme.StatusTesting
 
 @Composable
 fun TestCard(
@@ -44,18 +61,18 @@ fun TestCard(
     )
 
     val icon = when (category) {
-        TestCategory.SCREEN -> "📱"
-        TestCategory.TOUCH -> "👆"
-        TestCategory.BATTERY -> "🔋"
-        TestCategory.SENSORS -> "📡"
-        TestCategory.CAMERA -> "📷"
-        TestCategory.AUDIO -> "🔊"
-        TestCategory.CONNECTIVITY -> "📶"
-        TestCategory.STORAGE -> "💾"
-        TestCategory.CPU -> "⚡"
-        TestCategory.NETWORK -> "🌐"
-        TestCategory.DISPLAY_INFO -> "🖥️"
-        TestCategory.GPS -> "📍"
+        TestCategory.SCREEN -> "\uD83D\uDCF1"
+        TestCategory.TOUCH -> "\uD83D\uDC46"
+        TestCategory.BATTERY -> "\uD83D\uDD0B"
+        TestCategory.SENSORS -> "\uD83D\uDCE1"
+        TestCategory.CAMERA -> "\uD83D\uDCF7"
+        TestCategory.AUDIO -> "\uD83D\uDD0A"
+        TestCategory.CONNECTIVITY -> "\uD83D\uDCF6"
+        TestCategory.STORAGE -> "\uD83D\uDCBE"
+        TestCategory.CPU -> "\u26A1"
+        TestCategory.NETWORK -> "\uD83C\uDF10"
+        TestCategory.DISPLAY_INFO -> "\uD83D\uDDA5\uFE0F"
+        TestCategory.GPS -> "\uD83D\uDCCD"
     }
 
     ElevatedCard(
@@ -85,9 +102,9 @@ fun TestCard(
                 Text(text = icon, fontSize = MaterialTheme.typography.headlineMedium.fontSize)
             }
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.weight(0.05f))
 
-            Column(modifier = Modifier.weight(1f)) {
+            androidx.compose.foundation.layout.Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = category.displayName,
                     style = MaterialTheme.typography.titleMedium,
@@ -107,12 +124,14 @@ fun TestCard(
 
 @Composable
 fun StatusChip(status: TestStatus) {
-    val (text, color) = when (status) {
-        TestStatus.PASSED -> "OK" to StatusPassed
-        TestStatus.FAILED -> "FAIL" to StatusFailed
-        TestStatus.TESTING -> "..." to StatusTesting
-        TestStatus.SKIPPED -> "-" to StatusSkipped
-        TestStatus.PENDING -> "?" to StatusPending
+    val text: String
+    val color: Color
+    when (status) {
+        TestStatus.PASSED -> { text = "OK"; color = StatusPassed }
+        TestStatus.FAILED -> { text = "FAIL"; color = StatusFailed }
+        TestStatus.TESTING -> { text = "..."; color = StatusTesting }
+        TestStatus.SKIPPED -> { text = "-"; color = StatusSkipped }
+        TestStatus.PENDING -> { text = "?"; color = StatusPending }
     }
 
     Surface(
@@ -148,11 +167,10 @@ fun ProgressRing(
         modifier = modifier.size(size),
         contentAlignment = Alignment.Center
     ) {
-        androidx.compose.foundation.Canvas(
+        Canvas(
             modifier = Modifier.matchParentSize()
         ) {
             val sweep = animatedProgress * 360f
-            // Background ring
             drawArc(
                 color = backgroundColor,
                 startAngle = -90f,
@@ -160,7 +178,6 @@ fun ProgressRing(
                 useCenter = false,
                 style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
             )
-            // Progress arc
             drawArc(
                 color = foregroundColor,
                 startAngle = -90f,
@@ -212,11 +229,11 @@ fun DetailRow(
 }
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)`nfun TestScreenScaffold(
+fun TestScreenScaffold(
     title: String,
     onBack: () -> Unit,
-    actions: @Composable RowScope.() -> Unit = {},
-    content: @Composable (PaddingValues) -> Unit
+    actions: @Composable () -> Unit = {},
+    content: @Composable (androidx.compose.foundation.layout.PaddingValues) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -225,12 +242,14 @@ fun DetailRow(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Назад"
+                            imageVector = androidx.compose.material.icons.Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
                         )
                     }
                 },
-                actions = actions
+                actions = {
+                    actions()
+                }
             )
         },
         content = content
